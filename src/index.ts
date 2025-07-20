@@ -20,7 +20,6 @@ app.get('/', (_req, res) => {
   res.json({ message: 'Inventory API is running' });
 });
 
-
 // Add error handling middleware at the end
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
