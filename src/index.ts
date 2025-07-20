@@ -11,22 +11,24 @@ const app = express();
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+import authRoutes from './routes/auth-routes';
+
+app.use('/api/auth', authRoutes);
 
 // Routes
 app.get('/', (_req, res) => {
   res.json({ message: 'Inventory API is running' });
 });
 
-// Apply routes (uncomment and add your routes here)
-// app.use('/api/parts', partsRouter);
-// app.use('/api/suppliers', suppliersRouter);
 
-// Error handling middleware
-app.use(errorHandler);
-
-// Start server
-app.listen(env.port, () => {
-  console.log(`Server running on port ${env.port}`);
+// Add error handling middleware at the end
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  res.status(statusCode).json({
+    status: 'error',
+    message: err.message || 'Internal Server Error',
+    ...(process.env.NODE_ENV === 'development' && { stack: err.stack }),
+  });
 });
 
 export default app;
