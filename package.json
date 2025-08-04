@@ -5,11 +5,14 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
-    "start": "node dist/index.js",
-    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "build": "tsc",
+    "start": "encore run",
+    "dev": "encore run --watch",
+    "build": "encore build",
     "lint": "eslint . --ext .ts",
-    "format": "prettier --write \"src/**/*.ts\""
+    "format": "prettier --write \"src/**/*.ts\"",
+    "legacy:start": "node dist/index.js",
+    "legacy:dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "legacy:build": "tsc"
   },
   "keywords": [],
   "author": "",
@@ -42,6 +45,7 @@
     "@types/supertest": "^6.0.3",
     "@typescript-eslint/eslint-plugin": "^8.37.0",
     "@typescript-eslint/parser": "^8.37.0",
+    "encore.dev": "^1.48.12",
     "eslint": "^9.31.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.3",
