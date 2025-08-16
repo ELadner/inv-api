@@ -1,5 +1,4 @@
 {
-  "id": "inv-api",
-  "name": "Inventory Management API",
-  "lang": "ts"
+	"id": "inv-api-nxi2",
+	"lang": "typescript",
 }

@@ -32,6 +32,8 @@ model Part {
   orderItems            OrderItem[]
   attachments           Attachment[] // Added relation to attachments
   inventoryTransactions InventoryTransaction[] // Added relation to inventory transactions
+
+  @@map("parts")
 }
 
 model Supplier {
@@ -51,6 +53,8 @@ model Supplier {
   parts       Part[]
   orders      Order[]
   Attachment  Attachment[]
+
+  @@map("suppliers")
 }
 
 model Category {
@@ -59,6 +63,8 @@ model Category {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   parts     Part[]
+
+  @@map("categories")
 }
 
 model Unit {
@@ -67,6 +73,8 @@ model Unit {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   parts     Part[]
+
+  @@map("units")
 }
 
 model Order {
@@ -79,6 +87,8 @@ model Order {
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   orderItems  OrderItem[]
+
+  @@map("orders")
 }
 
 model OrderItem {
@@ -93,6 +103,7 @@ model OrderItem {
   updatedAt DateTime @updatedAt
 
   @@unique([orderId, partId])
+  @@map("order_items")
 }
 
 enum OrderStatus {
@@ -109,9 +120,12 @@ model User {
   email                 String                 @unique
   password              String
   role                  UserRole               @default(USER)
+  isActive              Boolean                @default(false)
   createdAt             DateTime               @default(now())
   updatedAt             DateTime               @updatedAt
   inventoryTransactions InventoryTransaction[] // Added relation to inventory transactions
+
+  @@map("users")
 }
 
 enum UserRole {
@@ -130,6 +144,8 @@ model InventoryTransaction {
   userId    Int?
   user      User?           @relation(fields: [userId], references: [id])
   createdAt DateTime        @default(now())
+
+  @@map("inventory_transactions")
 }
 
 enum TransactionType {
@@ -148,6 +164,8 @@ model Attachment {
   supplierId Int?
   supplier   Supplier? @relation(fields: [supplierId], references: [id])
   createdAt  DateTime  @default(now())
+
+  @@map("attachments")
 }
 
 model Manufacturer {
@@ -158,4 +176,6 @@ model Manufacturer {
   parts     Part[] // Relation to parts is now correctly defined both ways
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("manufacturers")
 }

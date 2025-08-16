@@ -1,7 +1,5 @@
-// Temporary: Use stubs for testing until Encore runtime is available
-// import { api } from "encore.dev/api";
-// import { authHandler } from "encore.dev/auth";
-import { api, authHandler } from "../test-stubs/encore-stubs";
+import { api } from "encore.dev/api";
+import { authHandler } from "encore.dev/auth";
 import { Prisma, UserRole } from '@prisma/client';
 import { auth, UserData } from '../auth/auth';
 import { 

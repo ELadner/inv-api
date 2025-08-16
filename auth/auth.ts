@@ -1,22 +1,60 @@
-// Temporary: Use stubs for testing until Encore runtime is available
-// import { api } from "encore.dev/api";
-// import { authHandler } from "encore.dev/auth";
-import { api, authHandler } from "../test-stubs/encore-stubs";
-import { User, UserRole } from '@prisma/client';
+import { api, Header } from "encore.dev/api";
+import { authHandler } from "encore.dev/auth";
+import { secret } from "encore.dev/config";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { JWT_SECRET, JWT_EXPIRES_IN } from '../common/config';
-import { RegisterUserDto, LoginUserDto } from '../src/dto/user-dto';
+import { JWT_EXPIRES_IN } from '../common/config';
 import { AlreadyExistsError, AuthenticationRequiredError, NotFoundError } from '../common/errors';
 import { successResponse, StandardResponse } from '../common/responses';
 import { prisma } from '../common/database';
 
-export interface AuthParams {
+// Load secrets within the service
+const JWT_SECRET = secret("JWT_SECRET");
+
+// Helper function to get JWT secret with fallback
+function getJWTSecret(): string {
+  try {
+    const secretValue = JWT_SECRET();
+    if (secretValue) {
+      return secretValue;
+    }
+  } catch (error) {
+    // Silently fall back to environment variable
+  }
+  
+  // Fallback to environment variable for local development
+  const envSecret = process.env.JWT_SECRET;
+  if (!envSecret) {
+    throw new Error('JWT_SECRET not found in Encore secrets or environment variables');
+  }
+  return envSecret;
+}
+
+// Define enums directly for Encore compatibility
+export enum UserRole {
+  USER = "USER",
+  ADMIN = "ADMIN", 
+  MANAGER = "MANAGER"
+}
+
+// Define User interface for Encore compatibility
+export interface User {
+  id: number;
+  username: string;
+  email: string;
+  password: string;
+  role: UserRole;
+  isActive: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface LoginParams {
   email: string;
   password: string;
 }
 
-export interface RegisterParams extends AuthParams {
+export interface RegisterParams extends LoginParams {
   username: string;
   role?: UserRole;
 }
@@ -33,17 +71,31 @@ export interface UserData {
   username: string;
   email: string;
   role: UserRole;
+  isActive: boolean;
+}
+
+// Auth token interface for Encore
+export interface AuthParams {
+  authorization?: Header<string>;
 }
 
 // Encore auth handler
 export const auth = authHandler<UserData>(
-  async (token: string): Promise<UserData | null> => {
+  async (params: AuthParams): Promise<UserData | null> => {
     try {
-      const decoded = jwt.verify(token, JWT_SECRET()) as any;
+      if (!params.authorization) {
+        return null;
+      }
+      
+      // Extract token from Authorization header (Bearer token format)
+      const authHeader = params.authorization as any;
+      const token = authHeader.replace('Bearer ', '');
+      
+      const decoded = jwt.verify(token, getJWTSecret()) as any;
       
       const user = await prisma.user.findUnique({
         where: { id: decoded.id },
-        select: { id: true, username: true, email: true, role: true },
+        select: { id: true, username: true, email: true, role: true, isActive: true },
       });
 
       return user;
@@ -71,19 +123,21 @@ export const register = api(
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(params.password, salt);
 
-      // Create user
+      // Create user (inactive by default - requires admin approval)
       const user = await prisma.user.create({
         data: {
           email: params.email,
           password: hashedPassword,
           username: params.username,
-          role: params.role || UserRole.USER
+          role: params.role || UserRole.USER,
+          isActive: false // New users are inactive by default
         },
         select: {
           id: true,
           email: true,
           username: true,
           role: true,
+          isActive: true,
           createdAt: true,
           updatedAt: true,
         },
@@ -96,7 +150,7 @@ export const register = api(
           email: user.email,
           role: user.role,
         },
-        JWT_SECRET(),
+        getJWTSecret(),
         {
           expiresIn: JWT_EXPIRES_IN,
         }
@@ -112,7 +166,7 @@ export const register = api(
 // Login endpoint
 export const login = api(
   { method: "POST", path: "/login", auth: false },
-  async (params: AuthParams): Promise<AuthResponse> => {
+  async (params: LoginParams): Promise<AuthResponse> => {
     try {
       // Find user
       const user = await prisma.user.findUnique({
@@ -129,6 +183,11 @@ export const login = api(
         throw AuthenticationRequiredError('Invalid credentials');
       }
 
+      // Check if user account is active
+      if (!user.isActive) {
+        throw AuthenticationRequiredError('Account is pending admin approval');
+      }
+
       // Generate JWT
       const token = jwt.sign(
         {
@@ -136,7 +195,7 @@ export const login = api(
           email: user.email,
           role: user.role,
         },
-        JWT_SECRET(),
+        getJWTSecret(),
         {
           expiresIn: JWT_EXPIRES_IN,
         }
@@ -169,6 +228,7 @@ export const getCurrentUser = api(
           email: true,
           username: true,
           role: true,
+          isActive: true,
           createdAt: true,
           updatedAt: true,
         },

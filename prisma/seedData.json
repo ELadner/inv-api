@@ -1,0 +1,321 @@
+{
+  "manufacturers": [
+    {
+      "id": 1,
+      "name": "Harley-Davidson",
+      "website": "https://www.harley-davidson.com",
+      "notes": "OEM and vintage Harley parts"
+    },
+    {
+      "id": 2,
+      "name": "S&S Cycle",
+      "website": "https://www.sscycle.com",
+      "notes": "Performance and replacement parts"
+    },
+    {
+      "id": 3,
+      "name": "Custom Chrome",
+      "website": "https://www.customchrome.com",
+      "notes": "Custom and aftermarket parts"
+    },
+    {
+      "id": 4,
+      "name": "JIMS USA",
+      "website": "https://www.jimsusa.com",
+      "notes": "Specialty tools and engine components"
+    },
+    {
+      "id": 5,
+      "name": "V-Twin Manufacturing",
+      "website": "https://www.vtwinmfg.com",
+      "notes": "Vintage reproduction parts"
+    }
+  ],
+  "suppliers": [
+    {
+      "id": 1,
+      "name": "American Motorcycle Supply",
+      "contactName": "Mike Johnson",
+      "email": "mike@amsupply.com",
+      "phone": "555-1234",
+      "address": "123 Main St",
+      "city": "Milwaukee",
+      "state": "WI",
+      "zipCode": "53201",
+      "country": "USA",
+      "notes": "Specializes in Harley OEM parts"
+    },
+    {
+      "id": 2,
+      "name": "Vintage Parts Depot",
+      "contactName": "Sarah Lee",
+      "email": "sarah@vintageparts.com",
+      "phone": "555-5678",
+      "address": "456 Oak Ave",
+      "city": "Sturgis",
+      "state": "SD",
+      "zipCode": "57785",
+      "country": "USA",
+      "notes": "Vintage and hard-to-find items"
+    },
+    {
+      "id": 3,
+      "name": "Custom Bike Works",
+      "contactName": "Tom Smith",
+      "email": "tom@custombikeworks.com",
+      "phone": "555-8765",
+      "address": "789 Pine Rd",
+      "city": "Los Angeles",
+      "state": "CA",
+      "zipCode": "90001",
+      "country": "USA",
+      "notes": "Custom and aftermarket suppliers"
+    },
+    {
+      "id": 4,
+      "name": "Performance Cycle",
+      "contactName": "Linda Green",
+      "email": "linda@performancecycle.com",
+      "phone": "555-4321",
+      "address": "321 Maple St",
+      "city": "Denver",
+      "state": "CO",
+      "zipCode": "80201",
+      "country": "USA",
+      "notes": "Performance upgrades"
+    },
+    {
+      "id": 5,
+      "name": "Classic Moto Traders",
+      "contactName": "Rick Brown",
+      "email": "rick@classicmoto.com",
+      "phone": "555-2468",
+      "address": "654 Elm St",
+      "city": "Austin",
+      "state": "TX",
+      "zipCode": "73301",
+      "country": "USA",
+      "notes": "Classic and reproduction parts"
+    }
+  ],
+  "units": [
+    { "id": 1, "name": "each" },
+    { "id": 2, "name": "set" },
+    { "id": 3, "name": "pair" },
+    { "id": 4, "name": "kit" }
+  ],
+  "categories": [
+    { "id": 1, "name": "Engine" },
+    { "id": 2, "name": "Brakes" },
+    { "id": 3, "name": "Transmission" },
+    { "id": 4, "name": "Electrical" },
+    { "id": 5, "name": "Body" },
+    { "id": 6, "name": "Controls" },
+    { "id": 7, "name": "Exhaust" },
+    { "id": 8, "name": "Suspension" },
+    { "id": 9, "name": "Fuel System" },
+    { "id": 10, "name": "Accessories" },
+    { "id": 11, "name": "Gaskets" },
+    { "id": 12, "name": "Drive" },
+    { "id": 13, "name": "Lighting" },
+    { "id": 14, "name": "Seats" },
+    { "id": 15, "name": "Valve Train" }
+  ],
+  "parts": [
+    {
+      "partNumber": "HD-1001",
+      "name": "Vintage Carburetor",
+      "description": "Original Keihin carburetor for 1970s Harley Shovelhead",
+      "quantity": 5,
+      "minQuantity": 1,
+      "location": "Aisle 1, Shelf B",
+      "price": 350.0,
+      "categoryId": 1,
+      "supplierId": 2,
+      "unitId": 1,
+      "manufacturerId": 1
+    },
+    {
+      "partNumber": "HD-1002",
+      "name": "Front Brake Rotor",
+      "description": "Stainless steel rotor for FLH models (1965-1984)",
+      "quantity": 12,
+      "minQuantity": 2,
+      "location": "Aisle 2, Shelf D",
+      "price": 120.0,
+      "categoryId": 2,
+      "supplierId": 1,
+      "unitId": 1,
+      "manufacturerId": 1
+    },
+    {
+      "partNumber": "HD-1003",
+      "name": "Kickstart Lever",
+      "description": "Chrome kickstart lever for Panhead/Knucklehead",
+      "quantity": 7,
+      "minQuantity": 1,
+      "location": "Aisle 3, Bin 5",
+      "price": 75.0,
+      "categoryId": 3,
+      "supplierId": 3,
+      "unitId": 1,
+      "manufacturerId": 5
+    },
+    {
+      "partNumber": "HD-1004",
+      "name": "Oil Filter",
+      "description": "High-flow oil filter for Harley Big Twin engines",
+      "quantity": 20,
+      "minQuantity": 5,
+      "location": "Aisle 4, Shelf A",
+      "price": 18.5,
+      "categoryId": 1,
+      "supplierId": 4,
+      "unitId": 1,
+      "manufacturerId": 2
+    },
+    {
+      "partNumber": "HD-1005",
+      "name": "Primary Chain",
+      "description": "Heavy-duty primary chain for 1958-1976 models",
+      "quantity": 8,
+      "minQuantity": 2,
+      "location": "Aisle 5, Shelf C",
+      "price": 65.0,
+      "categoryId": 12,
+      "supplierId": 2,
+      "unitId": 1,
+      "manufacturerId": 5
+    },
+    {
+      "partNumber": "HD-1006",
+      "name": "Spark Plug Set",
+      "description": "Set of 4 vintage-style spark plugs",
+      "quantity": 30,
+      "minQuantity": 10,
+      "location": "Counter Display",
+      "price": 32.0,
+      "categoryId": 4,
+      "supplierId": 1,
+      "unitId": 2,
+      "manufacturerId": 2
+    },
+    {
+      "partNumber": "HD-1007",
+      "name": "Handlebar Grips",
+      "description": "Leather grips for custom chopper builds",
+      "quantity": 15,
+      "minQuantity": 3,
+      "location": "Aisle 6, Bin 2",
+      "price": 45.0,
+      "categoryId": 6,
+      "supplierId": 5,
+      "unitId": 3,
+      "manufacturerId": 3
+    },
+    {
+      "partNumber": "HD-1008",
+      "name": "Rear Fender",
+      "description": "OEM-style rear fender for 1970s FLH",
+      "quantity": 3,
+      "minQuantity": 1,
+      "location": "Aisle 7, Shelf F",
+      "price": 210.0,
+      "categoryId": 5,
+      "supplierId": 2,
+      "unitId": 1,
+      "manufacturerId": 1
+    },
+    {
+      "partNumber": "HD-1009",
+      "name": "Throttle Cable",
+      "description": "Braided throttle cable for Harley Sportster",
+      "quantity": 18,
+      "minQuantity": 5,
+      "location": "Aisle 8, Bin 4",
+      "price": 28.0,
+      "categoryId": 6,
+      "supplierId": 3,
+      "unitId": 1,
+      "manufacturerId": 2
+    },
+    {
+      "partNumber": "HD-1010",
+      "name": "Seat Spring Kit",
+      "description": "Chrome seat springs for bobber builds",
+      "quantity": 10,
+      "minQuantity": 2,
+      "location": "Aisle 9, Shelf E",
+      "price": 55.0,
+      "categoryId": 14,
+      "supplierId": 4,
+      "unitId": 4,
+      "manufacturerId": 3
+    },
+    {
+      "partNumber": "HD-1011",
+      "name": "Exhaust Gasket",
+      "description": "Copper exhaust gasket for Shovelhead",
+      "quantity": 25,
+      "minQuantity": 5,
+      "location": "Aisle 10, Bin 1",
+      "price": 6.5,
+      "categoryId": 11,
+      "supplierId": 1,
+      "unitId": 1,
+      "manufacturerId": 4
+    },
+    {
+      "partNumber": "HD-1012",
+      "name": "Fuel Petcock",
+      "description": "Brass fuel petcock for vintage tanks",
+      "quantity": 6,
+      "minQuantity": 2,
+      "location": "Aisle 11, Shelf C",
+      "price": 38.0,
+      "categoryId": 9,
+      "supplierId": 2,
+      "unitId": 1,
+      "manufacturerId": 5
+    },
+    {
+      "partNumber": "HD-1013",
+      "name": "Chain Tensioner",
+      "description": "Adjustable chain tensioner for custom frames",
+      "quantity": 9,
+      "minQuantity": 2,
+      "location": "Aisle 12, Bin 3",
+      "price": 49.0,
+      "categoryId": 12,
+      "supplierId": 5,
+      "unitId": 1,
+      "manufacturerId": 3
+    },
+    {
+      "partNumber": "HD-1014",
+      "name": "Headlight Assembly",
+      "description": "7\" round headlight for classic Harley builds",
+      "quantity": 4,
+      "minQuantity": 1,
+      "location": "Aisle 13, Shelf D",
+      "price": 130.0,
+      "categoryId": 13,
+      "supplierId": 3,
+      "unitId": 1,
+      "manufacturerId": 1
+    },
+    {
+      "partNumber": "HD-1015",
+      "name": "Valve Cover Set",
+      "description": "Polished aluminum valve covers for Panhead",
+      "quantity": 5,
+      "minQuantity": 1,
+      "location": "Aisle 14, Bin 6",
+      "price": 110.0,
+      "categoryId": 15,
+      "supplierId": 4,
+      "unitId": 2,
+      "manufacturerId": 2
+    }
+  ]
+}

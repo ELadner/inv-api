@@ -1,6 +1,4 @@
-// Temporary: Use stub for testing until Encore runtime is available
-// import { APIError } from "encore.dev/api";
-import { APIError } from "../test-stubs/encore-stubs";
+import { APIError } from "encore.dev/api";
 
 // Standard error codes for the application
 export enum ErrorCode {
